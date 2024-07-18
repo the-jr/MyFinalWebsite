@@ -92,17 +92,20 @@ function displayCorrectOrIncorrect() {
 }
 
 // self-exp.
+var alreadyConfirmed = false;
+
 function startProcess() {
     numOfClicksRequired = randomNumber(1, maxNumber);
     numberElement.textContent = numOfClicksRequired.toString();
 
     clickButton.onclick = function () {
-        if (isLoading) { return; }
+        if (isLoading || alreadyConfirmed) { return; }
         numOfClicks++;
     }
 
     confirmButton.onclick = function () {
-        if (isLoading) { return; }
+        if (isLoading || alreadyConfirmed) { return; }
+        alreadyConfirmed = true;
 
         displayCorrectOrIncorrect()
         setTimeout(changeScore, 500)
@@ -115,6 +118,7 @@ function startProcess() {
             numOfClicks = 0;
             numOfClicksRequired = 0;
             isLoading = true;
+            alreadyConfirmed = false;
 
             startLoadingTitle();
             startLoadingCharacters();

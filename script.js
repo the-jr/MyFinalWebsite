@@ -82,7 +82,7 @@ function displayCorrectOrIncorrect() {
     if (numOfClicks == 1) { seconds_S_Value = "" } else { seconds_S_Value = "s" };
 
     if (numOfClicks === numOfClicksRequired) {
-        title.textContent = correctText.replace("(x)", numOfClicks.toString());
+        title.textContent = correctText.replace("(x)", scoreAmount.toString());
         title.textContent = title.textContent.replace("(n)", numOfClicks.toString());
         title.textContent = title.textContent.replace("(s)", seconds_S_Value);
     } else {

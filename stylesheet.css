@@ -1,0 +1,112 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+footer {
+    margin-top: 50px;
+}
+
+li {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    display: inline-block;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.points {
+    text-align: left;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#difficulty {
+    text-align: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    color: rgb(200, 255, 200);
+}
+
+#numberdisplay {
+    margin-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#clickbutton {
+    margin-top: 100px;
+    width: 200px;
+    height: 75px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    border-radius: 8%;
+
+    background-color: rgb(255, 255, 255);
+}
+
+#clickbutton:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+#confirmbutton {
+    margin-top: 50px;
+    height: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    border-radius: 8%;
+
+    background-color: rgb(161, 219, 255);
+}
+
+#confirmbutton:hover {
+    background-color: rgb(134, 183, 212);
+}
+
+#easy {
+    background-color: rgb(0, 201, 0);
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    border-color: rgb(0, 101, 0);
+    border-width: 3px;
+}
+
+#easy:hover {
+    background-color: rgb(0, 150, 0);
+}
+
+#medium {
+    background-color: rgb(201, 201, 0);
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    border-color: rgb(101, 101, 0);
+    border-width: 3px;
+}
+
+#medium:hover {
+    background-color: rgb(150, 150, 0);
+}
+
+#hard {
+    background-color: rgb(201, 0, 0);
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    border-color: rgb(101, 0, 0);
+    border-width: 3px;
+}
+
+#hard:hover {
+    background-color: rgb(150, 0, 0);
+}

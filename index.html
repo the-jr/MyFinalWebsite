@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Memorize. Click.</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="Images/cursor.png" type="image/png" sizes="16x16">
+</head>
+
+<body>
+    <div>
+        <h1 id="Title">A number will briefly appear on your screen in 10 seconds. When it does, your job is to click the button
+            below this text the amount of times that is shown by the number.</h1>
+        <h2 class="points">Score: 0</h2>
+        <h2 class="points">High Score (does not save): 0</h2>
+        <h2 id="difficulty">Difficulty: Easy</h2>
+
+        <h1 id="numberdisplay">|</h1> <!-- in intervals of 0.3 will this change to the next loading character -->
+            <button id="clickbutton">Click me!</button>
+    </div>
+
+    <div>
+        <button id="confirmbutton">Confirm Amount Of Clicks!</button>
+    </div>
+
+    <footer>
+        <h5>made by a cool dude</h5>
+        <h5>you can also change the difficulty below:</h5>
+        <ul>
+            <li><button id="easy">Easy</button></li>
+            <li><button id="medium">Medium</button></li>
+            <li><button id="hard">Hard</button></li>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

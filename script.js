@@ -97,10 +97,13 @@ function startProcess() {
     numberElement.textContent = numOfClicksRequired.toString();
 
     clickButton.onclick = function () {
+        if (isLoading) { return; }
         numOfClicks++;
     }
 
     confirmButton.onclick = function () {
+        if (isLoading) { return; }
+
         displayCorrectOrIncorrect()
         setTimeout(changeScore, 500)
         setTimeout(function () {

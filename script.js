@@ -259,7 +259,7 @@ function startLoadingCharacters() {
     numberElement.textContent = "\\";
 
     Interval = setInterval(function () {
-        if (paused) { return; }
+        if (paused) { numberElement.textContent = "..."; return; }
         if (!isLoading) {
             clearInterval(Interval);
             numberElement.textContent = "..."
@@ -276,6 +276,6 @@ function startLoadingCharacters() {
 }
 
 // this better not be false
-if (numberElement) { startLoadingCharacters() }
+if (numberElement) { startLoadingCharacters(); }
 
 startLoadingTitle();

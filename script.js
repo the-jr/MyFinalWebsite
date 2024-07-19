@@ -12,11 +12,12 @@ var currentScore = 0;
 var highScore = 0;
 var maxNumber = 50 // by default: easy - 50, medium - 100, hard - 250
 var targetMilliseconds = 500; // by default: easy - 500, medium - 250, hard - 50
-var scoreAmount = 10; // by default: easy - 10, medium - 15, hard - 25
+var scoreAmount = 10; // by default: easy - 10, medium - 15, hard - 30
 
 // for loading screen/timeout
 var secondsTimeout = 10;
 var isLoading = true
+var paused = false
 const loadingCharacters = ["|", "/", "-", "\\"]; // to be iterated thru
 
 // html elements
@@ -25,6 +26,7 @@ let title = document.getElementById("Title");
 let scoreLabels = document.getElementsByClassName("points");
 let clickButton = document.getElementById("clickbutton");
 let confirmButton = document.getElementById("confirmbutton");
+let pauseButton = document.getElementById("pausebutton");
 
 // difficulty buttons
 let easyButton = document.getElementById("easy");
@@ -51,21 +53,33 @@ function changeDifficulty(newInt, newMax, newScoreAmount, newColor, text) {
     difficultyLabel.textContent = ("Difficulty: ").concat(text);
 }
 
+// pause while in intermission
+pauseButton.onclick = function() {
+    if (!isLoading) { return; }
+    paused = !paused;
+
+    if (paused) { pauseButton.textContent = "Resume"; } else { pauseButton.textContent = "Pause"; }
+}
+pauseButton.ontouchend = pauseButton.onclick;
+
 // onclick funcs to change difficulty (this could be way more efficient but whatever)
 easyButton.onclick = function () {
     if (!isLoading) { return; }
     changeDifficulty(500, 50, 10, "rgb(200, 255, 200)", "Easy");
 }
+easyButton.ontouchend = easyButton.onclick;
 
 mediumButton.onclick = function () {
     if (!isLoading) { return; }
     changeDifficulty(250, 100, 15, "rgb(255, 255, 200)", "Medium");
 }
+mediumButton.ontouchend = mediumButton.onclick;
 
 hardButton.onclick = function () {
     if (!isLoading) { return; }
-    changeDifficulty(50, 250, 25, "rgb(255, 200, 200)", "Hard");
+    changeDifficulty(50, 250, 30, "rgb(255, 200, 200)", "Hard");
 }
+hardButton.ontouchend = hardButton.onclick;
 
 // self-exp.
 function changeTitle() {
@@ -96,12 +110,25 @@ var alreadyConfirmed = false;
 
 function startProcess() {
     numOfClicksRequired = randomNumber(1, maxNumber);
+    var isBigNumber = 0;
+
+    if (numOfClicksRequired > 100 && scoreAmount == 30) { // if it's hard mode and clicks required is huge 3 digit number
+        scoreAmount += 10; // 40
+        isBigNumber++;
+
+        if (numOfClicksRequired > 175) {
+            scoreAmount += 10; // 50
+            isBigNumber++;
+        }
+    }
+
     numberElement.textContent = numOfClicksRequired.toString();
 
     clickButton.onclick = function () {
         if (isLoading || alreadyConfirmed) { return; }
         numOfClicks++;
     }
+    clickButton.ontouchend = clickButton.onclick;
 
     confirmButton.onclick = function () {
         if (isLoading || alreadyConfirmed) { return; }
@@ -120,10 +147,13 @@ function startProcess() {
             isLoading = true;
             alreadyConfirmed = false;
 
+            scoreAmount -= (isBigNumber * 10) // reset to default
+
             startLoadingTitle();
             startLoadingCharacters();
         }, 5000) // 2000 + 500 for changeScore + 2500 for Resetting... function
     }
+    confirmButton.ontouchend = confirmButton.onclick;
 
     // make num of times to click nothing after x milliseconds (this is the memory part !!!!)
     setTimeout(function () {
@@ -154,6 +184,8 @@ function changeScore() {
 function startLoadingTitle() {
     var titleInterval;
     titleInterval = setInterval(function () {
+        if (paused) { return; }
+
         secondsTimeout -= 1;
         changeTitle();
 
@@ -166,12 +198,11 @@ function startLoadingTitle() {
 }
 
 function startLoadingCharacters() {
-    // while it should be 0 the 300ms delay will cause "|" to be in loading mode for 600ms at the beginning
-    // so we just set index to the next value to even things out ;)
-    var index = 1;
+    var index = 0;
     var Interval;
 
     Interval = setInterval(function () {
+        if (paused) { return; }
         if (!isLoading) {
             clearInterval(Interval);
             numberElement.textContent = "..."

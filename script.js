@@ -18,6 +18,7 @@ var scoreAmount = 10; // by default: easy - 10, medium - 15, hard - 30
 var secondsTimeout = 10;
 var isLoading = true
 var paused = false
+var userIsBad = false
 const loadingCharacters = ["|", "/", "-", "\\"]; // to be iterated thru
 
 // html elements
@@ -25,8 +26,10 @@ let numberElement = document.getElementById("numberdisplay");
 let title = document.getElementById("Title");
 let scoreLabels = document.getElementsByClassName("points");
 let clickButton = document.getElementById("clickbutton");
+let subButton = document.getElementById("subbutton");
 let confirmButton = document.getElementById("confirmbutton");
 let pauseButton = document.getElementById("pausebutton");
+let displayButton = document.getElementById("displaybutton");
 
 // difficulty buttons
 let easyButton = document.getElementById("easy");
@@ -54,13 +57,28 @@ function changeDifficulty(newInt, newMax, newScoreAmount, newColor, text) {
 }
 
 // pause while in intermission
-pauseButton.onclick = function() {
+pauseButton.onclick = function () {
     if (!isLoading) { return; }
     paused = !paused;
 
-    if (paused) { pauseButton.textContent = "Resume"; } else { pauseButton.textContent = "Pause"; }
+    if (paused) {
+        pauseButton.textContent = "Resume";
+        pauseButton.style.backgroundColor = "rgb(200, 255, 200)"
+    } else {
+        pauseButton.textContent = "Pause";
+        pauseButton.style.backgroundColor = "rgb(255, 200, 200)"
+    }
 }
 pauseButton.ontouchend = pauseButton.onclick;
+
+// display clicks for bad people
+displayButton.onclick = function () {
+    if (!isLoading || scoreAmount >= 30) { return; }
+    userIsBad = (!userIsBad);
+
+    if (userIsBad) { displayButton.textContent = "Undisplay Clicks"; } else { displayButton.textContent = "Display Clicks"; }
+}
+displayButton.ontouchend = displayButton.onclick;
 
 // onclick funcs to change difficulty (this could be way more efficient but whatever)
 easyButton.onclick = function () {
@@ -77,6 +95,12 @@ mediumButton.ontouchend = mediumButton.onclick;
 
 hardButton.onclick = function () {
     if (!isLoading) { return; }
+
+    if (userIsBad) {
+        userIsBad = false;
+        displayButton.textContent = "Display Clicks";
+    }
+
     changeDifficulty(50, 250, 30, "rgb(255, 200, 200)", "Hard");
 }
 hardButton.ontouchend = hardButton.onclick;
@@ -127,15 +151,39 @@ function startProcess() {
     clickButton.onclick = function () {
         if (isLoading || alreadyConfirmed) { return; }
         numOfClicks++;
+
+        if (userIsBad && scoreAmount < 30) {
+            numberElement.textContent = "Number of clicks: " + numOfClicks.toString();
+        }
     }
     clickButton.ontouchend = clickButton.onclick;
+
+    subButton.onclick = function () {
+        if (isLoading || alreadyConfirmed || numOfClicks <= 0) { return; }
+        numOfClicks--;
+
+        if (userIsBad && scoreAmount < 30) {
+            numberElement.textContent = "Number of clicks: " + numOfClicks.toString();
+        }
+    }
+    subButton.ontouchend = subButton.onclick;
 
     confirmButton.onclick = function () {
         if (isLoading || alreadyConfirmed) { return; }
         alreadyConfirmed = true;
 
+        if (userIsBad) {
+            scoreAmount -= 5;
+        }
+
         displayCorrectOrIncorrect()
+
         setTimeout(changeScore, 500)
+        if (userIsBad) {
+            setTimeout(function () {
+                scoreAmount += 5;
+            }, 750)
+        }
         setTimeout(function () {
             title.textContent = "Resetting..."
         }, 2500) // 500 + 500
@@ -173,16 +221,22 @@ function changeScore() {
         currentScoreLabel.textContent = defaultCurrentScoreText.replace("(x)", currentScore.toString());
         if (currentScore > highScore) {
             highScore = currentScore;
-            highScoreLabel.textContent = defaultHighScoreText.replace("(x)", highScore.toString())
         }
     } else {
         currentScore = 0;
         currentScoreLabel.textContent = defaultCurrentScoreText.replace("(x)", "0");
     }
+
+    // in case someone inspect elemented the high score label
+    highScoreLabel.textContent = defaultHighScoreText.replace("(x)", highScore.toString())
 }
 
 function startLoadingTitle() {
     var titleInterval;
+
+    // default
+    changeTitle();
+
     titleInterval = setInterval(function () {
         if (paused) { return; }
 
@@ -200,6 +254,9 @@ function startLoadingTitle() {
 function startLoadingCharacters() {
     var index = 0;
     var Interval;
+
+    // default
+    numberElement.textContent = "\\";
 
     Interval = setInterval(function () {
         if (paused) { return; }

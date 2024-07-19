@@ -16,21 +16,30 @@
         <h2 class="points">High Score (does not save): 0</h2>
         <h2 id="difficulty">Difficulty: Easy</h2>
 
-        <h1 id="numberdisplay">|</h1> <!-- in intervals of 0.3 will this change to the next loading character -->
-            <button id="clickbutton">Click me!</button>
+        <h1 id="numberdisplay">\</h1> <!-- in intervals of 0.3 will this change to the next loading character -->
+        <button id="clickbutton">Click me!</button>
     </div>
 
     <div>
-        <button id="confirmbutton">Confirm Amount Of Clicks!</button>
+        <button id="pausebutton">Pause</button> <br>
+        <button id="confirmbutton"><b>Confirm Amount Of Clicks!</b></button>
     </div>
 
     <footer>
         <h5>made by a cool dude</h5>
         <h5>you can also change the difficulty below:</h5>
-        <ul>
+        <ul class = "buttons">
             <li><button id="easy">Easy</button></li>
             <li><button id="medium">Medium</button></li>
             <li><button id="hard">Hard</button></li>
+        </ul>
+
+        <h4>how the game works:</h4>
+        <ul>
+            <li class="disclaimer"><b>easy takes 500 milliseconds to show the number, medium takes 250 milliseconds and hard takes 50 milliseconds</b></li>
+            <li class="disclaimer"><b>you earn 10 points in easy difficulty, 15 points in medium and 30 in hard</b></li>
+            <li class="disclaimer"><b>however, in hard mode, if you get a number above 100 (or especially above 175) you will get more points (40-50)</b></li>
+            <li class="disclaimer"><b>easy difficulty's maximum clicks required is 50, medium is 100 and hard is 250</b></li>
         </ul>
     </footer>
 

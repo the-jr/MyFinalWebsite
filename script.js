@@ -69,7 +69,7 @@ pauseButton.onclick = function () {
         pauseButton.style.backgroundColor = "rgb(255, 200, 200)"
     }
 }
-pauseButton.ontouchend = pauseButton.onclick;
+pauseButton.ontouchstart = pauseButton.onclick;
 
 // display clicks for bad people
 displayButton.onclick = function () {
@@ -78,20 +78,20 @@ displayButton.onclick = function () {
 
     if (userIsBad) { displayButton.textContent = "Undisplay Clicks"; } else { displayButton.textContent = "Display Clicks"; }
 }
-displayButton.ontouchend = displayButton.onclick;
+displayButton.ontouchstart = displayButton.onclick;
 
 // onclick funcs to change difficulty (this could be way more efficient but whatever)
 easyButton.onclick = function () {
     if (!isLoading) { return; }
     changeDifficulty(500, 50, 10, "rgb(200, 255, 200)", "Easy");
 }
-easyButton.ontouchend = easyButton.onclick;
+easyButton.ontouchstart = easyButton.onclick;
 
 mediumButton.onclick = function () {
     if (!isLoading) { return; }
     changeDifficulty(250, 100, 15, "rgb(255, 255, 200)", "Medium");
 }
-mediumButton.ontouchend = mediumButton.onclick;
+mediumButton.ontouchstart = mediumButton.onclick;
 
 hardButton.onclick = function () {
     if (!isLoading) { return; }
@@ -103,7 +103,7 @@ hardButton.onclick = function () {
 
     changeDifficulty(50, 250, 30, "rgb(255, 200, 200)", "Hard");
 }
-hardButton.ontouchend = hardButton.onclick;
+hardButton.ontouchstart = hardButton.onclick;
 
 // self-exp.
 function changeTitle() {
@@ -156,7 +156,7 @@ function startProcess() {
             numberElement.textContent = "Number of clicks: " + numOfClicks.toString();
         }
     }
-    clickButton.ontouchend = clickButton.onclick;
+    clickButton.ontouchstart = clickButton.onclick;
 
     subButton.onclick = function () {
         if (isLoading || alreadyConfirmed || numOfClicks <= 0) { return; }
@@ -166,7 +166,7 @@ function startProcess() {
             numberElement.textContent = "Number of clicks: " + numOfClicks.toString();
         }
     }
-    subButton.ontouchend = subButton.onclick;
+    subButton.ontouchstart = subButton.onclick;
 
     confirmButton.onclick = function () {
         if (isLoading || alreadyConfirmed) { return; }
@@ -201,7 +201,7 @@ function startProcess() {
             startLoadingCharacters();
         }, 5000) // 2000 + 500 for changeScore + 2500 for Resetting... function
     }
-    confirmButton.ontouchend = confirmButton.onclick;
+    confirmButton.ontouchstart = confirmButton.onclick;
 
     // make num of times to click nothing after x milliseconds (this is the memory part !!!!)
     setTimeout(function () {

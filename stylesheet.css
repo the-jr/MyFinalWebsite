@@ -62,11 +62,10 @@ ul {
     background-color: rgb(206, 206, 206);
 }
 
-#pausebutton {
-    margin-top: 20px;
-    width: 125px;
-    height: 40px;
-    font-size: larger;
+#subbutton {
+    margin-top: 10px;
+    width: 150px;
+    height: 30px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bolder;
     border-radius: 8%;
@@ -74,22 +73,53 @@ ul {
     background-color: rgb(255, 255, 255);
 }
 
-#pausebutton:hover {
+#subbutton:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+#functionbuttons {
+    margin-top: 40px;
+}
+
+#pausebutton {
+    width: 125px;
+    height: 40px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    border-radius: 8%;
+
+    background-color: rgb(255, 200, 200);
+}
+
+#displaybutton {
+    margin-top: 5px;
+    width: 125px;
+    height: 40px;
+    font-size: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    border-radius: 8%;
+
+    background-color: rgb(255, 255, 255);
+}
+
+#displaybutton:hover {
     background-color: rgb(206, 206, 206);
 }
 
 #confirmbutton {
-    margin-top: 20px;
+    margin-top: 10px;
     height: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
     border-radius: 8%;
 
-    background-color: rgb(161, 219, 255);
+    background-color: rgb(150, 200, 255);
 }
 
 #confirmbutton:hover {
-    background-color: rgb(134, 183, 212);
+    background-color: rgb(100, 150, 205);
 }
 
 #easy {

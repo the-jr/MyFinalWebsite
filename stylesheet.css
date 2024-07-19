@@ -24,6 +24,10 @@ ul {
     margin-bottom: 10px;
 }
 
+.disclaimer {
+    display: list-item;
+}
+
 .points {
     text-align: left;
     margin-top: 50px;
@@ -58,8 +62,24 @@ ul {
     background-color: rgb(206, 206, 206);
 }
 
+#pausebutton {
+    margin-top: 20px;
+    width: 125px;
+    height: 40px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    border-radius: 8%;
+
+    background-color: rgb(255, 255, 255);
+}
+
+#pausebutton:hover {
+    background-color: rgb(206, 206, 206);
+}
+
 #confirmbutton {
-    margin-top: 50px;
+    margin-top: 20px;
     height: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
